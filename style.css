@@ -1,0 +1,830 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+/* =========================
+   1. ROOT VARIABLES
+========================= */
+:root {
+    --ink: #172033;
+    --muted: #7b8497;
+    --line: #e8ebf2;
+    --bg: #f5f7fb;
+    --blue: #4263eb;
+    --navy: #18233b;
+}
+
+/* =========================
+   2. GLOBAL STYLES
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================
+   3. MAIN APP LAYOUT
+========================= */
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    max-width: 1600px;
+    margin: auto;
+    padding: 27px 34px 18px;
+}
+
+/* =========================
+   4. SIDEBAR
+========================= */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 245px;
+    padding: 27px 17px;
+    background: #fff;
+    border-right: 1px solid var(--line);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 10px 38px;
+}
+
+.brand-mark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    font-weight: 800;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4263eb, #7b61e8);
+}
+
+.brand strong {
+    font: 800 17px Manrope, sans-serif;
+}
+
+.brand strong span {
+    color: var(--blue);
+}
+
+.brand small,
+.sidebar-bottom small {
+    display: block;
+    margin-top: 3px;
+    color: #9aa2b2;
+    font-size: 9px;
+    letter-spacing: 1.2px;
+}
+
+.nav-label,
+.eyebrow {
+    padding: 0 12px 10px;
+    color: #a0a7b5;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.nav-item {
+    width: 100%;
+    margin: 2px 0;
+    padding: 12px;
+    color: #697386;
+    text-align: left;
+    font: 600 13px 'DM Sans', sans-serif;
+    border: 0;
+    border-radius: 9px;
+    background: none;
+}
+
+.nav-item span {
+    display: inline-block;
+    width: 25px;
+    font-size: 17px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #3858df;
+    background: #eef1ff;
+}
+
+.sidebar-note {
+    margin: 35px 5px 20px;
+    padding: 14px;
+    font-size: 12px;
+    border-radius: 10px;
+    background: #f5f6ff;
+}
+
+.sidebar-note p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.sidebar-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 18px 5px 0;
+    font-size: 12px;
+    border-top: 1px solid var(--line);
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    color: #4560d9;
+    font-weight: 700;
+    border-radius: 50%;
+    background: #e9edff;
+}
+
+/* =========================
+   5. TOPBAR
+========================= */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.topbar .eyebrow {
+    padding: 0 0 5px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font: 800 25px Manrope, sans-serif;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.status-pill,
+.tag {
+    padding: 7px 11px;
+    color: #596579;
+    font-size: 11px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #fff;
+}
+
+.status-pill i {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background: #27b47e;
+}
+
+/* =========================
+   6. WELCOME BANNER
+========================= */
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 25px 28px;
+    color: #fff;
+    border-radius: 15px;
+    background: linear-gradient(110deg, #344fc4, #6b63df);
+}
+
+.eyebrow.light {
+    padding: 0 0 8px;
+    color: #d8dcff;
+}
+
+.welcome h2 {
+    margin: 0 0 5px;
+    font: 800 23px Manrope, sans-serif;
+}
+
+.welcome p {
+    margin: 0;
+    color: #e1e5ff;
+    font-size: 13px;
+}
+
+/* =========================
+   7. BUTTONS
+========================= */
+.btn {
+    padding: 11px 15px;
+    font: 700 12px 'DM Sans', sans-serif;
+    border: 0;
+    border-radius: 8px;
+    transition: transform 0.15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    color: #fff;
+    background: var(--blue);
+}
+
+.btn-light {
+    color: #3d54c8;
+    background: #fff;
+}
+
+.btn-outline {
+    color: #465bd1;
+    border: 1px solid #dfe4ff;
+    background: #fff;
+}
+
+.full {
+    width: 100%;
+}
+
+/* =========================
+   8. STATISTICS CARDS
+========================= */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-card,
+.panel {
+    min-width: 0;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.stat-card {
+    padding: 17px;
+}
+
+.stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #778196;
+    font-size: 12px;
+}
+
+.stat-icon {
+    display: grid;
+    place-items: center;
+    width: 31px;
+    height: 31px;
+    font-style: normal;
+    border-radius: 9px;
+}
+
+.purple {
+    color: #8057d9;
+    background: #f0eaff;
+}
+
+.green {
+    color: #209968;
+    background: #e5f8ef;
+}
+
+.orange {
+    color: #d88b2c;
+    background: #fff1df;
+}
+
+.blue {
+    color: #4564e8;
+    background: #e9efff;
+}
+
+.stat-card > strong {
+    display: block;
+    margin: 12px 0 2px;
+    font: 800 26px Manrope, sans-serif;
+}
+
+.stat-card > small {
+    color: #9aa2b2;
+    font-size: 11px;
+}
+
+/* =========================
+   9. CONTENT GRID
+========================= */
+.content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
+    gap: 17px;
+}
+
+.panel {
+    padding: 20px;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.panel h3 {
+    margin: 0 0 5px;
+    font: 700 15px Manrope, sans-serif;
+}
+
+.panel-heading p,
+.muted {
+    margin: 0;
+    color: #929bad;
+    font-size: 11px;
+}
+
+.text-btn {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 700;
+    border: 0;
+    background: none;
+}
+
+/* =========================
+   10. TABLES
+========================= */
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+th {
+    padding: 12px 9px;
+    color: #9aa2b2;
+    font-size: 9px;
+    letter-spacing: 0.8px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+}
+
+td {
+    padding: 13px 9px;
+    color: #566176;
+    font-size: 11px;
+    border-bottom: 1px solid #f0f2f6;
+}
+
+.empty {
+    padding: 28px;
+    color: #a1a8b5;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 9px;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 20px;
+}
+
+.badge.Present {
+    color: #21885d;
+    background: #e7f8ef;
+}
+
+.badge.Late {
+    color: #c27a20;
+    background: #fff2df;
+}
+
+/* =========================
+   11. TIPS & NOTICE
+========================= */
+.tips ol {
+    margin: 18px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tips li {
+    position: relative;
+    padding: 0 0 16px 28px;
+    font-size: 12px;
+}
+
+.tips li::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 19px;
+    height: 19px;
+    color: #4a62dd;
+    font-size: 10px;
+    border-radius: 50%;
+    background: #eef1ff;
+    content: '✓';
+}
+
+.tips li span {
+    display: block;
+    margin-top: 4px;
+    color: #8d96a8;
+    font-size: 11px;
+}
+
+.notice {
+    padding: 11px;
+    color: #69759b;
+    font-size: 10px;
+    line-height: 1.5;
+    border: 1px solid #e7eaff;
+    border-radius: 8px;
+    background: #f5f7ff;
+}
+
+/* =========================
+   12. SECTION INTRO
+========================= */
+.section-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0 18px;
+}
+
+.section-intro h2 {
+    margin: 0 0 5px;
+    font: 800 20px Manrope, sans-serif;
+}
+
+.section-intro p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================
+   13. FORMS
+========================= */
+.form {
+    display: grid;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.form label {
+    display: grid;
+    gap: 7px;
+    color: #566176;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.form input,
+.form select,
+.filters input,
+.filters select {
+    width: 100%;
+    padding: 11px 12px;
+    color: #344054;
+    font: 12px 'DM Sans', sans-serif;
+    outline: none;
+    border: 1px solid #e2e6ee;
+    border-radius: 7px;
+    background: #fff;
+}
+
+.form input:focus,
+.form select:focus,
+.filters input:focus {
+    border-color: #8294f4;
+    box-shadow: 0 0 0 3px #eef0ff;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* =========================
+   14. QR GENERATOR
+========================= */
+.generate-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.qr-panel {
+    text-align: center;
+}
+
+.qr-panel .panel-heading {
+    text-align: left;
+}
+
+.qr-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 275px;
+    margin: 15px 0;
+    padding: 15px;
+    border: 1px dashed #dce1ec;
+    border-radius: 10px;
+}
+
+.qr-placeholder canvas,
+.qr-placeholder img {
+    max-width: 100%;
+}
+
+.qr-empty {
+    color: #aab4d8;
+    font-size: 40px;
+}
+
+.qr-placeholder b {
+    font-size: 12px;
+}
+
+.qr-placeholder small {
+    color: #9aa2b2;
+    font-size: 10px;
+}
+
+.session-info {
+    margin: 10px 0 15px;
+    color: #697386;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* =========================
+   15. QR SCANNER
+========================= */
+.scan-grid {
+    grid-template-columns: 0.85fr 1.15fr;
+}
+
+.scanner-panel #reader {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px dashed #dce1ec;
+    border-radius: 9px;
+}
+
+.scanner-actions {
+    display: flex;
+    gap: 9px;
+    margin-top: 13px;
+}
+
+.message {
+    margin-top: 12px;
+    padding: 10px;
+    color: #758096;
+    font-size: 11px;
+    border-radius: 8px;
+    background: #f5f7fb;
+}
+
+.message.success {
+    color: #21885d;
+    background: #e8f8ef;
+}
+
+.message.error {
+    color: #c54d43;
+    background: #fff0ef;
+}
+
+/* =========================
+   16. FILTERS
+========================= */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filters input {
+    max-width: 300px;
+}
+
+.filters select {
+    max-width: 170px;
+}
+
+/* =========================
+   17. PAGE VIEWS
+========================= */
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+}
+
+/* =========================
+   18. FOOTER
+========================= */
+footer {
+    padding: 30px 0 5px;
+    color: #a0a7b5;
+    font-size: 10px;
+    text-align: center;
+}
+
+footer span {
+    padding: 0 5px;
+}
+
+/* =========================
+   19. TABLET RESPONSIVE
+========================= */
+@media (max-width: 1000px) {
+    .sidebar {
+        width: 210px;
+    }
+
+    .main {
+        padding: 23px;
+    }
+
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-grid,
+    .generate-grid,
+    .scan-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   20. MOBILE RESPONSIVE
+========================= */
+@media (max-width: 650px) {
+    .app-shell {
+        display: block;
+    }
+
+    .sidebar {
+        display: block;
+        width: 100%;
+        padding: 13px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+        padding: 0 5px 12px;
+    }
+
+    .nav-label,
+    .sidebar-note,
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .sidebar .nav-item {
+        display: inline-block;
+        width: auto;
+        padding: 9px;
+        font-size: 11px;
+    }
+
+    .nav-item span {
+        width: 18px;
+    }
+
+    .main {
+        padding: 18px 13px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+    }
+
+    .topbar h1 {
+        font-size: 21px;
+    }
+
+    .top-actions {
+        display: block;
+        text-align: right;
+    }
+
+    .date {
+        display: block;
+        margin-top: 7px;
+    }
+
+    .welcome {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .welcome h2 {
+        font-size: 20px;
+    }
+
+    .stat-grid {
+        gap: 9px;
+    }
+
+    .stat-card {
+        padding: 13px;
+    }
+
+    .stat-card > strong {
+        font-size: 22px;
+    }
+
+    .panel {
+        padding: 15px;
+    }
+
+    .section-intro {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .section-intro h2 {
+        font-size: 17px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters input,
+    .filters select {
+        max-width: none;
+    }
+}

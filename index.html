@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart QR Attendance</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">QR</div><div><strong>Attend<span>Smart</span></strong><small>ATTENDANCE SYSTEM</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="dashboard"><span>▦</span> Dashboard</button>
+      <button class="nav-item" data-view="generate"><span>▧</span> Generate QR</button>
+      <button class="nav-item" data-view="scan"><span>⌗</span> Student Scanner</button>
+      <button class="nav-item" data-view="records"><span>☷</span> Attendance Records</button>
+      <div class="sidebar-note"><strong>Prototype mode</strong><p>This version saves data in this browser only.</p></div>
+      <div class="sidebar-bottom"><div class="avatar">AD</div><div><strong>Demo Administrator</strong><small>Local prototype</small></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow">COLLEGE ATTENDANCE</div><h1 id="page-title">Dashboard</h1></div>
+        <div class="top-actions"><span class="status-pill"><i></i> System online</span><span class="date" id="today-label"></span></div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="welcome"><div><div class="eyebrow light">SMART QR CODE ATTENDANCE</div><h2>Good day, Teacher!</h2><p>Manage class attendance with session-based QR codes.</p></div><button class="btn btn-light" data-go="generate">＋ Create attendance session</button></div>
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total records</span><b class="stat-icon purple">▤</b></div><strong id="stat-total">0</strong><small>Attendance submissions</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Present</span><b class="stat-icon green">✓</b></div><strong id="stat-present">0</strong><small>Checked in on time</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Late</span><b class="stat-icon orange">◷</b></div><strong id="stat-late">0</strong><small>Checked in after cutoff</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Active session</span><b class="stat-icon blue">▣</b></div><strong id="stat-session">0</strong><small>Currently open sessions</small></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-heading"><div><h3>Recent attendance</h3><p>Latest student check-ins</p></div><button class="text-btn" data-go="records">View all →</button></div><div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>SUBJECT</th><th>TIME</th><th>STATUS</th></tr></thead><tbody id="recent-table"><tr><td colspan="4" class="empty">No attendance records yet.</td></tr></tbody></table></div></article>
+          <article class="panel tips"><div class="panel-heading"><div><h3>Quick guide</h3><p>How to use the prototype</p></div></div><ol><li><b>Create a session</b><span>Enter the subject, section and late cutoff.</span></li><li><b>Display the QR code</b><span>Students scan the code while the session is open.</span></li><li><b>Review attendance</b><span>Check student names and attendance status.</span></li></ol><div class="notice">For camera access, run this project on <b>localhost</b> or HTTPS.</div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-generate">
+        <div class="section-intro"><div><h2>Create attendance session</h2><p>Generate a unique QR code for one class meeting.</p></div></div>
+        <div class="content-grid generate-grid">
+          <article class="panel">
+            <h3>Session details</h3><p class="muted">Complete the class information below.</p>
+            <form id="session-form" class="form">
+              <label>Subject name<input id="subject" required placeholder="e.g. Web Development"></label>
+              <div class="form-row"><label>Section<input id="section" required placeholder="e.g. BSIT 2A"></label><label>Room<input id="room" placeholder="e.g. Lab 203"></label></div>
+              <div class="form-row"><label>Late cutoff time<input id="cutoff" type="time" required></label><label>Session duration<select id="duration"><option value="30">30 minutes</option><option value="60" selected>1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select></label></div>
+              <button class="btn btn-primary full" type="submit">Generate QR code →</button>
+            </form>
+          </article>
+          <article class="panel qr-panel"><div class="panel-heading"><div><h3>Session QR code</h3><p>Students scan this code to check in.</p></div><span class="tag" id="qr-state">Not generated</span></div><div class="qr-placeholder" id="qr-box"><div class="qr-empty">▧</div><b>Your QR code will appear here</b><small>Create a session to generate a code.</small></div><div id="session-info" class="session-info hidden"></div><button class="btn btn-outline full" id="end-session" disabled>End session</button></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-scan">
+        <div class="section-intro"><div><h2>Student attendance scanner</h2><p>Enter your student details, then scan the teacher's active QR code.</p></div></div>
+        <div class="content-grid scan-grid">
+          <article class="panel">
+            <h3>Student information</h3><p class="muted">Use your registered student ID and name.</p>
+            <form id="student-form" class="form">
+              <label>Student ID<input id="student-id" required placeholder="e.g. 2026-0001"></label>
+              <label>Full name<input id="student-name" required placeholder="e.g. Juan Dela Cruz"></label>
+              <button class="btn btn-primary full" type="submit">Save student details</button>
+            </form>
+            <div class="notice">Only submit attendance for yourself. This prototype does not verify a student's identity.</div>
+          </article>
+          <article class="panel scanner-panel">
+            <div class="panel-heading"><div><h3>Scan QR code</h3><p>Allow camera access when your browser asks.</p></div><span class="tag">Camera</span></div>
+            <div id="reader"></div>
+            <div class="scanner-actions"><button class="btn btn-primary" id="start-scan">Start camera</button><button class="btn btn-outline" id="stop-scan" disabled>Stop camera</button></div>
+            <div id="scan-message" class="message">Camera is not running.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-records">
+        <div class="section-intro"><div><h2>Attendance records</h2><p>Review and export attendance submissions saved in this browser.</p></div><button class="btn btn-primary" id="export-csv">↓ Export CSV</button></div>
+        <article class="panel">
+          <div class="filters"><input id="record-search" placeholder="Search student or subject..."><select id="status-filter"><option value="all">All statuses</option><option value="Present">Present</option><option value="Late">Late</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>STUDENT ID</th><th>STUDENT NAME</th><th>SUBJECT / SECTION</th><th>DATE & TIME</th><th>STATUS</th></tr></thead><tbody id="records-table"><tr><td colspan="5" class="empty">No records found.</td></tr></tbody></table></div>
+        </article>
+      </section>
+      <footer>Smart QR Attendance <span>•</span> Student project prototype</footer>
+    </main>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
